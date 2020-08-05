@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self';" /> -->
+    <!-- librerias de estilos -->
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="../../node_modules/materialize-css/dist/css/materialize.min.css">
+    <link rel="stylesheet" href="../../node_modules/js-year-calendar/dist/js-year-calendar.min.css">
+    <link rel="stylesheet" href="../../node_modules/tippy.js/dist/tippy.css">
+    <!-- fin librerias de estilos -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa Verde</title>
+  </head>
+  <body>
+    <!-- <main> -->
+    <div class="row">
+      <div class="navbar-fixed">
+      <nav id="navegacionprincipal">
+          <div class="nav-wrapper">
+            <ul class="tabs">
+              <li class="tab col l4">
+                <a href="#clienteTab"><i class="material-icons left">arrow_back</i> Clientes</a>
+              </li>
+              <li class="tab col l4">
+                <a class="active" href="#casaverde">Casa Verde</a>
+              </li>
+              <li class="tab col l4">
+                <a href="#eventoTab"><i class="material-icons right">arrow_forward</i> Eventos</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div id="casaverde">
+        <h1>Hola World!</h1>
+        <input type="text" name="fechaPrincipal" id="fechaPrincipal" class="datepicker" placeholder="Fecha de Evento">
+        <!-- We are using node<!-- <script>document.write(process.versions.node)</script>  <span id="versionNode"></span>,
+        Chrome<!-- <script>document.write(process.versions.chrome)</script>  <span id="versionChrome"></span>,
+        and Electron <!-- <script>document.write(process.versions.electron)</script> <span id="versionElectron"></span> -->
+        <button class="btn modal-trigger" data-target="modaltest">modal</button>
+        <div class="calendar"></div>
+        <div id="modaltest" class="modal">
+          <div class="modal-content">
+            <h2>Crear Evento</h2>
+            <form action="crearClienteNuevo" method="post" id="formNewCliente"></form>
+            <form id="crearEvento">
+              <div class="row">
+                <div class="input-field col m6 s12">
+                    <label for="fecha">Fecha del Evento</label>
+                    <input type="date" name="fecha" id="fecha" autofocus>
+                    <span class="text-helper" data-success="bien" data-error="fecha no valida"></span>
+                </div>
+
+                <div class="input-field col m6 s12">
+                  <select class="select" id="cliente">
+
+                  </select>
+                  <label>Seleccionar Cliente</label>
+                  <span class="text-helper" data-error="asigne un cliente" data-success="bien"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="" id="nuevocliente" style="display: none;">
+                    <div class="row">
+                      <div class="input-field col m6 s12">
+                        <input form="formNewCliente" type="text" name="nombrenuevo" id="nombrenuevo" class="validate">
+                        <span class="text-helper" data-error="no es valido" data-success="bien"></span>
+                        <label for="nombrenuevo">Nombre</label>
+                      </div>
+
+                      <div class="input-field col m6 s12">
+                        <input form="formNewCliente" type="email" name="emailnuevo" id="emailnuevo">
+                        <span class="text-helper" data-error="correo inválido" data-success="bien"></span>
+                        <label for="emailnuevo">Correo electronico</label>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="input-field col m6 s12">
+                        <label for="telefono1nuevo">Telefono principal</label>
+                        <input form="formNewCliente" type="tel" name="telefono1nuevo" id="telefono1nuevo" class="validate">
+                        <span class="text-helper" data-error="telefono inválido" data-success="bien"></span>
+                        <label for="telefono1nuevo">Telefono</label>
+                      </div>
+                      <div class="input-field col m6 s12">
+                        <label for="telefono2nuevo">Telefono de respaldo</label>
+                        <input form="formNewCliente" type="tel" name="telefono2nuevo" id="telefono2nuevo" class="validate">
+                        <span class="text-helper" data-success="bien" data-error="telefono inválido"></span>
+                      </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field">
+                          <label for="clientecomentariosnuevo">Comentarios</label>
+                          <textarea form="formNewCliente" class="materialize-textarea validate" name="clientecomentariosnuevo" id="clientecomentariosnuevo" data-length="200"></textarea>
+                          <span class="text-helper" data-error="Has excedido el limite de caracteres" data-success="Bien"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                      <button form="formNewCliente" id="limpiarCliente" class="btn" type="reset"><i class="material-icons">clear</i> Limpiar</button>
+
+                      <button form="formNewCliente" id="crearnuevocliente" class="btn" type="submit">Registrar cliente<i class="material-icons">right</i></button>
+                    </div>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col m4">
+                  <label for="precio">Precio</label>
+                  <input type="number" name="precio" id="precio" class="validate">
+                  <span class="helper-text" data-error="monto invalido" data-success="bien"></span>
+                </div>
+
+                <div class="input-field col m4">
+                  <label for="adicional">Adicional</label>
+                  <input type="number" name="adicional" id="adicional" class="validate">
+                  <span class="helper-text" data-error="monto invalido" data-success="bien"></span>
+                </div>
+                <div class="input-field col m4">
+                  <label for="total">Total</label>
+                  <input type="text" name="total" id="total" class="disabled">
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col m6 s12">
+                  <select class="select" id="tipoEvento">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Cumpleaños</option>
+                    <option value="2">Aniversario</option>
+                    <option value="3">Boda</option>
+                    <option value="4">Bautizo</option>
+                    <option value="5">Reunion</option>
+                    <option value="6">Otro</option>
+                  </select>
+                  <label>Tipo de Evento</label>
+                  <span class="text-helper" data-error="debe seleccionar alguna opcion válida" data-success="bien"></span>
+                </div>
+                <div class="input-field col m6 s12">
+                  <select class="select" id="statusEvento">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="reservado">Reservado</option>
+                    <option value="pagado">Pagado</option>
+                  </select>
+                  <label>Status del Evento</label>
+                  <span class="text-helper" data-error="debe seleccionar alguna opcion válida" data-success="bien"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col m12">
+                  <textarea name="comentarios" id="comentarios" class="materialize-textarea" data-length="200"></textarea>
+                  <label for="comentarios">Comentarios</label>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn modal-close" id="crear">
+                  Reservar <i class="material-icons">done</i>
+                </button>
+              </div>
+            </form>
+          </div><!-- /modal-content  -->
+          <div class="modal-footer">
+            <button class="btn modal-close">Cerrar</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="eventoTab">
+        <div class="">
+          <div class="row">
+            <div class="col s12">
+              <ul class="collection" id="listEvento">
+                Por ahora no hay pagos registrados en el Sistema
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="clienteTab">
+        <!-- <div class="container"> -->
+          <!-- <div class="row"> -->
+            <!-- <div class="col s12"> -->
+              <ul class="collection" id="listCliente">
+                Por ahora no hay clientes registrados en el Sistema
+              </ul>
+            <!-- </div> -->
+          <!-- </div> -->
+        <!-- </div> -->
+        <div class="fixed-action-btn toolbar">
+          <a class="btn-floating btn-large blue">
+            <i class="large material-icons">mode_edit</i>
+          </a>
+          <ul>
+            <li><a class="btn-floating modal-trigger" href="#modalCliente"><i class="medium material-icons">add</i></a></li>
+            <li><a class="btn-floating darken-1"><i class="medium material-icons">delete</i></a></li>
+          </ul>
+        </div>
+        <div class="modal" id="modalCliente">
+          <div class="modal-content">
+            <form action="crearCliente" id="formCliente" method="post">
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="text" name="nombre" id="nombre" class="validate" autofocus>
+                  <label for="nombre">Nombre</label>
+                  <span class="helper-text" data-error="Formato Inválido" data-success="Bien"></span>
+                </div>
+              </div>
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <input type="text" name="" id="telefono1" class="validate">
+                      <label for="telefono1">Telefono Principal</label>
+                      <span class="helper-text" data-error="Dato Inválido" data-success="Bien"></span>
+                    </div>
+                    <div class="input-field col s6">
+                      <input type="text" name="telefono2" id="telefono2" class="validate">
+                      <label for="telefono2">Telefono Secundario</label>
+                      <span class="helper-text" data-error="Dato Inválido" data-success="Bien"></span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input type="email" name="email" id="email" class="validate">
+                      <label for="email">Correo Electrónico</label>
+                      <span class="helper-text" data-error="Correo Inválido" data-success="Bien"></span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <textarea name="comentarioscliente" id="comentarioscliente" cols="30" rows="10" data-length=200 class="materialize-textarea"></textarea>
+                      <label for="comentarioscliente">Comentarios</label>
+                      <span class="helper-text" data-error="Dato Inválido" data-success="Bien"></span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col s3"><button type="reset" class="btn">Limpiar <i class="materialize-icons"></i></button>
+                    </div>
+                    <div class="col s3"><button type="submit" class="btn">Registrar <i class="materialize-icons"></i></button>
+                    </div>
+                  </div>
+            </form>
+          </div>
+          <div class="modal-footer"><button class="btn modal-close waves-effect waves-green">Cerrar</button></div>
+        </div>
+      </div>
+    </div>
+    <!-- modal para modificar clientes -->
+    <div class="modal" id="updateCliente">
+      <div class="modal-content">
+        <form action="" method="post" id="formUpdateCliente">
+          <div class="row">
+                <div class="input-field col s12">
+                  <input type="text" name="updatenombre" id="updatenombre" class="validate" autofocus>
+                  <label for="updatenombre">Nombre</label>
+                  <span class="helper-text" data-error="Formato Inválido" data-success="Bien"></span>
+                </div>
+              </div>
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <input type="text" name="updatetelefono1" id="updatetelefono1" class="validate">
+                      <label for="updatetelefono1">Telefono Principal</label>
+                      <span class="helper-text" data-error="Dato Inválido" data-success="Bien"></span>
+                    </div>
+                    <div class="input-field col s6">
+                      <input type="text" name="updatetelefono2" id="updatetelefono2" class="validate">
+                      <label for="updatetelefono2">Telefono Secundario</label>
+                      <span class="helper-text" data-error="Dato Inválido" data-success="Bien"></span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input type="email" name="updateemail" id="updateemail" class="validate">
+                      <label for="updateemail">Correo Electrónico</label>
+                      <span class="helper-text" data-error="Correo Inválido" data-success="Bien"></span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <textarea name="updatecomentarioscliente" id="updatecomentarioscliente" data-length=200 class="materialize-textarea"></textarea>
+                      <label for="updatecomentarioscliente">Comentarios</label>
+                      <span class="helper-text" data-error="Dato Inválido" data-success="Bien"></span>
+                    </div>
+                  </div>
+                  <div class="row input-field" hidden><input type="text" name="idCliente" id="idCliente"></div>
+                  <div class="row">
+                    <div class="col s3"><button type="reset" class="btn">Limpiar <i class="materialize-icons"></i></button>
+                    </div>
+                    <div class="col s3"><button type="submit" class="btn modal-close">Modificar <i class="materialize-icons"></i></button>
+                    </div>
+                  </div>
+        </form>
+      </div>
+      <div class="modal-footer"><button class="btn modal-close waves-effect waves-green">Cerrar</button></div>
+    </div>
+    <!-- fin modal para modificar clientes -->
+    <!-- </main> -->
+        <footer class="page-footer">
+          <div class="footer-copyright">
+            <div class="container">
+            © 2020 Copyright Text
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+          </div>
+        </footer>
+
+    <!-- <script src="/node_modules/jquery/dist/jquery.min.js" /> -->
+    <!-- Compiled and minified JavaScript -->
+    <script src="../../node_modules/materialize-css/dist/js/materialize.min.js"></script>
+    <script src="../../node_modules/js-year-calendar/dist/js-year-calendar.min.js"></script>
+    <script src="../../node_modules/js-year-calendar/locales/js-year-calendar.es.js"></script>
+    <script src="../../node_modules/tippy.js/dist/tippy.cjs.js"></script>
+    <script src="../renderer.js"></script>
+    <!-- <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        new Calendar('.calendar', {
+          style : 'background',
+          minDate : new Date()
+        });
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          headerToolbar:{
+            center:'dayGridMonth,listWeek'
+          },
+          initialView : "dayGridMonth"
+        });
+        calendar.render();
+      });
+    </script> -->
+  </body>
+</html>

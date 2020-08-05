@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario Evento</title>
+</head>
+<body>
+    <nav id="addEvento" style="display: none;">
+    <div class="nav-wrapper">
+            <h1>Crear Evento</h1>
+        </div>
+        </nav>
+    <nav id="editEvento" style="display: none;">
+        <h1>Modificar Evento</h1>
+    </nav>
+    <form action="crear" method="post" id="crearEvento">
+		<div class="row">
+			<div class="input-field col m6 s12">
+				<label for="fecha">Fecha del Evento</label>
+				<input type="date" name="fecha" id="fecha" autofocus>
+				<span class="text-helper" data-success="bien" data-error="fecha no valida"></span>
+			</div>
+
+			<div class="input-field col m6 s12">
+				<select id="cliente">
+					<option value="" disabled selected>Seleccione</option>
+					<option value="newCliente">Nuevo Cliente</option>
+					<option value="selectCliente">Cliente Registrado</option>
+				</select>
+				<label>Seleccionar Cliente</label>
+				<span class="text-helper" data-error="asigne un cliente" data-success="bien"></span>
+			</div>
+		</div>
+
+		<div class="" id="nuevocliente" style="display: none;">
+			<div class="row">
+				<div class="input-field col m6 s12">
+					<input type="text" name="nombrenuevo" id="nombrenuevo" class="validate">
+					<label for="nombrenuevo">Nombre</label>
+					<span class="text-helper" data-error="no es válido" data-success="bien"></span>
+				</div>
+
+				<div class="input-field col m6 s12">
+					<input type="email" name="emailnuevo" id="emailnuevo">
+					<span class="text-helper" data-error="correo inválido" data-success="bien"></span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col m6 s12">
+					<label for="telefono1">Telefono principal</label>
+					<input type="tel" name="telefono1" id="telefono1" class="validate">
+					<span class="text-helper" data-error="telefono inválido" data-success="bien"></span>
+				</div>
+				<div class="input-field col m6 s12">
+					<label for="telefono2">Telefono de respaldo</label>
+					<input type="tel" name="telefono2" id="telefono2" class="validate">
+					<span class="text-helper" data-success="bien" data-error="telefono inválido"></span>
+				</div>
+			</div>
+		<div class="input-field col s12">
+			<label for="clientecomentariosnuevo">Comentarios</label>
+			<textarea name="clientecomentariosnuevo" id="clientecomentariosnuevo" cols="30" rows="10"></textarea>
+		</div>
+
+	</div> <!--/div del formulario de cliente-->
+
+		<div>
+			<button id="limpiarCliente" class="btn"><i class="material-icons"></i> Limpiar</button>
+
+			<button id="crearnuevocliente" class="btn"><i class="material-icons"></i>Registrar cliente</button>
+		</div>
+
+  </div>
+
+        <div class="input-field col m6 s12">
+            <select id="tipoEvento">
+				<option value="" disabled selected>Seleccione</option>
+				<option value="cumpleanios">Cumpleaños</option>
+				<option value="aniversario">Aniversario</option>
+				<option value="boda">Boda</option>
+				<option value="bautizo">Bautizo</option>
+				<option value="reunion">Reunion</option>
+				<option value="otro">Otro</option>
+			</select>
+			<label>Tipo de Evento</label>
+			<span class="text-helper" data-error="debe seleccionar alguna opcion válida" data-success="bien"></span>
+		</div>
+
+        <div class="input-field col s12">
+			<label for="precio"></label>
+			<input type="number" name="precio" id="precio" class="validate">
+			<span class="helper-text" data-error="monto invalido" data-success="bien"></span>
+		</div>
+
+        <div class="input-field col s12">
+			<label for="adicional"></label>
+			<input type="number" name="adicional" id="adicional" class="validate">
+			<span class="helper-text" data-error="monto invalido" data-success="bien"></span>
+		</div>
+
+        <div class="input-field col s12">
+			<label for="total"></label>
+			<input type="text" name="total" id="total" class="disabled">
+		</div>
+
+        <div class="input-field col s12">
+			<label for="comentarios">Comentarios</label>
+			<textarea name="comentarios" id="comentarios" cols="30" rows="10" data-length="200"></textarea>
+		</div>
+
+		<div class="modal-footer">
+			<button type="submit" class="btn" id="crear">
+				Reservar <i class="material-icons">right</i>
+			</button>
+		</div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="../../node_modules/materialize-css/dist/css/materialize.min.css">
+    <link rel="stylesheet" href="../../node_modules/fullcalendar/main.css">
+    <!-- fin librerias de estilos -->
+    <title>pruebaTabs</title>
+</head>
+<body>
+    <div class="">
+        <div class="row">
+            <div class="col s12">
+                <ul class="tabs">
+                    <li class="tab col s3"><a href="#item01">item 1</a></li>
+                    <li class="tab col s3"><a href="#item02">item 02</a></li>
+                    <li class="tab col s3"><a href="#item03">item 03</a></li>
+                </ul>
+            </div>
+            <div class="col s12 blue" id="item01">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, nostrum? Reprehenderit sunt, recusandae error nulla, assumenda laboriosam impedit dolorem quidem, reiciendis dolor cumque ratione? Mollitia eos voluptatem quidem sed autem.</div>
+            <div class="col s12 blue" id="item02">
+            </div>
+            <div class="col s12 blue" id="item03">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt ex labore earum unde quasi obcaecati maxime molestias voluptatem quo minima illum
+            Autem cumque tenetur sed ipsam voluptate incidunt voluptates quia architecto reprehenderit omnis, ducimus saepe quidem, voluptatibus quibusdam neque obcaecati ipsa amet corrupti a? Ab sit, odio eaque iure explicabo iusto!
+            Rerum explicabo asperiores molestiae assumenda corrupti! Nisi porro accusantium error odio veniam molestias nulla reprehenderit consequuntur suscipit, eaque distinctio fugiat ipsum asperiores quas, in autem officia, maiores natus accusamus dolores.
+            Provident suscipit quod, voluptate amet, alias labore adipisci rerum modi cupiditate dolor, veritatis ut dicta possimus! Obcaecati illo, rerum accusamus optio provident, perspiciatis reiciendis doloremque commodi consectetur ab ex distinctio?
+            Provident ea error aperiam architecto quasi omnis, minima veritatis, incidunt illo facere doloremque! Non, velit? Accusamus aperiam quia odio atque dolore neque repellendus totam, omnis dolorib
+            Error eveniet voluptatibus, ea quaerat culpa quod, illum laborum suscipit quis accusamus omnis nesciunt id, quasi excepturi fugiat. Accusamus, cum architecto provident sed in tempora asperiores? Iste quae repellat perferendis.
+            Debitis molestiae nobis minus molestias, quae sint rem iusto asperiores et dolorum, laborum tenetur repellat, dolores ipsam mollitia! Excepturi, aut! Quod laboriosam praesentium officia accusantium omnis laudantium doloribus. Facere, corporis.
+            A, velit voluptate? Fugit temporibus blanditiis quaerat. Ipsam suscipit iure placeat dolorem! Aut, ducimus dolorem. Ratione cupiditate ipsa fugit optio tempore harum enim quae, rerum cum repellat provident nihil pariatur.
+            Nulla neque magni aut esse asperiores, dolore ad illum ea, sequi eligendi expedita! Repellat deserunt doloremque deleniti nemo debitis neque vero fugiat animi nam harum, id similique consequuntur delectus laborum!
+            Quis voluptatibus animi consequatur rerum quam distinctio, aliquid nam, doloremque unde quidem velit quod, non soluta. Sunt quaerat facilis adipisci! Obcaecati autem rem nemo consequatur nobis, optio dicta illo! Incidunt.
+            Dolorum, ut facere quidem facilis consequuntur odio? Culpa maiores corrupti a voluptatibus. Ipsum libero culpa ducimus quis iusto, repellendus quasi nulla tempore? Nemo ad error odit eaque quisquam veritatis laudantium.
+            At dolorum dolorem necessitatibus odio aperiam nobis voluptate quia in, explicabo assumenda fugit? Consectetur dolor deserunt repudiandae temporibus quis aut quaerat magnam ex suscipit delectus dolorem ad inventore, tempora repellat.
+            Beatae molestias facilis odio similique in? Ullam atque rerum aliquid vel quisquam nemo facere consequuntur. Beatae, quae nobis incidunt voluptas, sunt, laborum sint nam dolore repellendus esse quod! Qui, corporis.
+            Dolor dolorem cupiditate minima, quibusdam voluptas repellendus, quaerat ad maiores, facilis vitae earum a quae illo similique asperiores impedit ab beatae deleniti necessitatibus placeat exercitationem! Sint ad quod explicabo illo.</div>
+        </div>
+    </div>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="../../node_modules/materialize-css/dist/js/materialize.min.js"></script>
+    <script src="../../node_modules/fullcalendar/main.js"></script>
+    <!-- <script src="../renderer.js"></script> -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        var calendarEl = document.getElementById('item02');
+        var calendar = new FullCalendar.Calendar(calendarEl);
+        calendar.render();
+      });
+    </script>
+</body>
+</html>

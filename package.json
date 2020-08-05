@@ -1,0 +1,33 @@
+{
+  "name": "Casa-Verde",
+  "version": "1.0.0",
+  "description": "Aplicacion de escritorio para el manejo y organizacion de eventos",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [
+    "proyecto",
+    "eventos",
+    "organizacion",
+    "manejo"
+  ],
+  "author": "Rafael Sarmiento",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "fullcalendar": "^5.1.0",
+    "jquery": "^3.5.1",
+    "js-year-calendar": "^1.0.2",
+    "materialize-css": "^1.0.0-rc.2",
+    "moment": "^2.27.0",
+    "mongoose": "^5.9.20",
+    "tippy.js": "^6.2.6"
+  },
+  "devDependencies": {
+    "electron": "^9.0.4"
+  },
+  "repository": {
+    "url": "https://github.com/rafasarmiento/Casa-Verde"
+  }
+}
