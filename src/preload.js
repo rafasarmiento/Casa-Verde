@@ -26,8 +26,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     var botonFlotante = document.querySelector('.fixed-action-btn');
     let botonFlotanteInst = M.FloatingActionButton.init(botonFlotante, {
-        hoverEnabled: false,
-        toolbarEnabled: true
+        hoverEnabled: false
     });
 
     var textuales = document.querySelectorAll('input[type="text"], textarea');

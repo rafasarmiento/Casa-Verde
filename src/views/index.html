@@ -9,18 +9,18 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="../../node_modules/materialize-css/dist/css/materialize.min.css">
     <link rel="stylesheet" href="../../node_modules/js-year-calendar/dist/js-year-calendar.min.css">
-    <link rel="stylesheet" href="../../node_modules/tippy.js/dist/tippy.css">
+    <link rel="stylesheet" href="../../assets/appStyles.css">
     <!-- fin librerias de estilos -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Casa Verde</title>
   </head>
   <body>
-    <!-- <main> -->
+    <main>
     <div class="row">
       <div class="navbar-fixed">
       <nav id="navegacionprincipal">
           <div class="nav-wrapper">
-            <ul class="tabs">
+            <ul class="tabs tabs-transparent">
               <li class="tab col l4">
                 <a href="#clienteTab"><i class="material-icons left">arrow_back</i> Clientes</a>
               </li>
@@ -34,13 +34,7 @@
           </div>
         </nav>
       </div>
-      <div id="casaverde">
-        <h1>Hola World!</h1>
-        <input type="text" name="fechaPrincipal" id="fechaPrincipal" class="datepicker" placeholder="Fecha de Evento">
-        <!-- We are using node<!-- <script>document.write(process.versions.node)</script>  <span id="versionNode"></span>,
-        Chrome<!-- <script>document.write(process.versions.chrome)</script>  <span id="versionChrome"></span>,
-        and Electron <!-- <script>document.write(process.versions.electron)</script> <span id="versionElectron"></span> -->
-        <button class="btn modal-trigger" data-target="modaltest">modal</button>
+      <div id="casaverde" class="">
         <div class="calendar"></div>
         <div id="modaltest" class="modal">
           <div class="modal-content">
@@ -50,7 +44,7 @@
               <div class="row">
                 <div class="input-field col m6 s12">
                     <label for="fecha">Fecha del Evento</label>
-                    <input type="date" name="fecha" id="fecha" autofocus>
+                    <input type="date" name="fecha" id="fecha" readonly>
                     <span class="text-helper" data-success="bien" data-error="fecha no valida"></span>
                 </div>
 
@@ -93,7 +87,7 @@
                     <div class="row">
                         <div class="input-field">
                           <label for="clientecomentariosnuevo">Comentarios</label>
-                          <textarea form="formNewCliente" class="materialize-textarea validate" name="clientecomentariosnuevo" id="clientecomentariosnuevo" data-length="200"></textarea>
+                          <textarea form="formNewCliente" class="materialize-textarea validate" name="clientecomentariosnuevo" id="clientecomentariosnuevo" data-length="200" maxlength="200"></textarea>
                           <span class="text-helper" data-error="Has excedido el limite de caracteres" data-success="Bien"></span>
                         </div>
                     </div>
@@ -120,7 +114,7 @@
                 </div>
                 <div class="input-field col m4">
                   <label for="total">Total</label>
-                  <input type="text" name="total" id="total" class="disabled">
+                  <input type="text" name="total" id="total" readonly>
                 </div>
               </div>
               <div class="row">
@@ -149,7 +143,7 @@
               </div>
               <div class="row">
                 <div class="input-field col m12">
-                  <textarea name="comentarios" id="comentarios" class="materialize-textarea" data-length="200"></textarea>
+                  <textarea name="comentarios" id="comentarios" class="materialize-textarea" data-length="200" maxlength="200"></textarea>
                   <label for="comentarios">Comentarios</label>
                 </div>
               </div>
@@ -189,13 +183,13 @@
           <!-- </div> -->
         <!-- </div> -->
         <div class="fixed-action-btn toolbar">
-          <a class="btn-floating btn-large blue">
-            <i class="large material-icons">mode_edit</i>
+          <a class="btn-floating btn-large blue modal-trigger waves-effect waves-light" href="#modalCliente">
+            <i class="large material-icons">add</i>
           </a>
-          <ul>
+          <!-- <ul>
             <li><a class="btn-floating modal-trigger" href="#modalCliente"><i class="medium material-icons">add</i></a></li>
             <li><a class="btn-floating darken-1"><i class="medium material-icons">delete</i></a></li>
-          </ul>
+          </ul> -->
         </div>
         <div class="modal" id="modalCliente">
           <div class="modal-content">
@@ -228,7 +222,7 @@
                   </div>
                   <div class="row">
                     <div class="input-field col s12">
-                      <textarea name="comentarioscliente" id="comentarioscliente" cols="30" rows="10" data-length=200 class="materialize-textarea"></textarea>
+                      <textarea name="comentarioscliente" id="comentarioscliente" cols="30" rows="10" data-length=200 class="materialize-textarea" maxlength="200"></textarea>
                       <label for="comentarioscliente">Comentarios</label>
                       <span class="helper-text" data-error="Dato Inválido" data-success="Bien"></span>
                     </div>
@@ -294,38 +288,77 @@
       <div class="modal-footer"><button class="btn modal-close waves-effect waves-green">Cerrar</button></div>
     </div>
     <!-- fin modal para modificar clientes -->
-    <!-- </main> -->
+
+    <!-- modal para pagos -->
+    <div class="modal" id="newPayment">
+      <div class="modal-content">
+        <form action="" method="post" id="formNewPayment">
+          <div class="row">
+                <div class="input-field col s6">
+                  <input type="date" name="paymentEvent" id="paymentEvent" readonly>
+                  <label for="paymentEvent">Evento a pagar</label>
+                </div>
+                <div class="input-field col s6">
+                  <input type="date" name="paymentDate" id="paymentDate" required>
+                  <label for="paymentDate">Fecha del pago</label>
+                </div>
+              </div>
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <select class="select" name="paymentType" id="paymentType">
+                        <option value="" selected disabled>Seleccione</option>
+                        <option value="1">Efectivo</option>
+                        <option value="2">Tarjeta</option>
+                        <option value="3">Transferencia/Depósito</option>
+                      </select>
+                      <label for="paymentType">Tipo de pago</label>
+                    </div>
+                    <div class="input-field col s6">
+                      <select class="select" name="paymentClient" id="paymentClient"></select>
+                      <label for="paymentClient">Cliente</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <input type="number" name="paymentMount" id="paymentMount" />
+                      <label for="paymentMount">Monto del pago</label>
+                    </div>
+                    <div class="input-field col s6"><input type="text" id="paymentRemain" name="paymentRemain" readonly><label for="paymentRemain">Total a pagar</label></div>
+                  </div>
+                  <div class="row">
+                    <div class="col s3"><button type="reset" class="btn">Limpiar <i class="materialize-icons">clear</i></button>
+                    </div>
+                    <div class="col s3"><button type="submit" class="btn modal-close">Efectuar <i class="materialize-icons">payment</i></button>
+                    </div>
+                  </div>
+        </form>
+      </div>
+      <div class="modal-footer"><button class="btn modal-close waves-effect waves-green">Cerrar</button></div>
+    </div>
+    <!-- fin modal para pagos -->
+    <div class="modal" id="">
+      <div class="modal-content">
+        <ul id="listPago">
+          Lista de pagos
+        </ul>
+      </div>
+    </div>
+    </main>
         <footer class="page-footer">
-          <div class="footer-copyright">
+          <!-- <div class="footer-copyright"> -->
             <div class="container">
-            © 2020 Copyright Text
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+              <div class="row">
+            © 2020 Copyright
+            <a class="grey-text text-lighten-4 right" href="./morelinks.html">More Links</a>
+              </div>
             </div>
-          </div>
+          <!-- </div> -->
         </footer>
 
-    <!-- <script src="/node_modules/jquery/dist/jquery.min.js" /> -->
     <!-- Compiled and minified JavaScript -->
     <script src="../../node_modules/materialize-css/dist/js/materialize.min.js"></script>
     <script src="../../node_modules/js-year-calendar/dist/js-year-calendar.min.js"></script>
     <script src="../../node_modules/js-year-calendar/locales/js-year-calendar.es.js"></script>
-    <script src="../../node_modules/tippy.js/dist/tippy.cjs.js"></script>
     <script src="../renderer.js"></script>
-    <!-- <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        new Calendar('.calendar', {
-          style : 'background',
-          minDate : new Date()
-        });
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          headerToolbar:{
-            center:'dayGridMonth,listWeek'
-          },
-          initialView : "dayGridMonth"
-        });
-        calendar.render();
-      });
-    </script> -->
   </body>
 </html>
