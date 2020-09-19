@@ -10,7 +10,7 @@ const newPayment = new Schema({
         required: true
     },
     tipo: {
-        type: String,
+        type: Number,
         required: true
     },
     cliente: {

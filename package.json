@@ -4,7 +4,8 @@
   "description": "Aplicacion de escritorio para el manejo y organizacion de eventos",
   "main": "src/main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "dev": "nodemon ."
   },
   "keywords": [
     "proyecto",

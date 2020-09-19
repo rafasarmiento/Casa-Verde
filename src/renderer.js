@@ -86,15 +86,12 @@ clienteEvento.addEventListener('change', e => {
     if (seleccion == "newCliente") {
         formularionuevo.style.display = "block";
         console.log("seccion cliente mostrada");
-        M.toast({ html: "seccion cliente mostrada" });
     } else {
         if (formularionuevo.style.display === "none") {
             console.log("ya esta oculta la seccion");
-            //M.toast({ html: "ya esta oculta la seccion" });
         } else {
             formularionuevo.style.display = "none";
             console.log("seccion cliente ocultada");
-            //M.toast({ html: "seccion cliente ocultada" });
         }
 
     }
@@ -208,23 +205,13 @@ ipcRenderer.on("errores", (e, error) => {
     M.toast({ html: error });
 });
 
-// function cerrarModales(modal) {
-//     for (let index = 0; index < modal.length; index++) {
-//         const element = modal[index];
-//         console.log(element);
-//         //modal[element].reset();
-//     }
-// };
-
-// const x = document.querySelectorAll('.modal-close');
-// console.log(x);
-// x.addEventListener('click', cerrarModales(x));
-
 function editarCliente(cliente) {
     idCliente = cliente;
     const dataCliente = listaClientes.find(x => x._id === cliente);
+
     //limpieza de formulario
     formUpdateCliente.reset();
+
     //relleno de formulario
     updateIdCliente.value = dataCliente._id;
     updatenombreCliente.value = dataCliente.nombre;
@@ -238,13 +225,7 @@ function eliminarCliente(cliente) {
     const response = confirm("Seguro que quiere proceder con la eliminacion?");
     if (response) {
         console.log("cliente a eliminar: " + cliente);
-        // const elementos = [];
-        // elementos.push(clientes);
-        // if (elementos.length > 1) {
-        //     M.toast({ html: "Eliminando" + elementos.length + "registros..." });
-        // } else {
             M.toast({ html: "Eliminando a " + cliente + "..." });
-        // }
         ipcRenderer.send("eliminar-cliente", cliente);
     } else {
         M.toast({ html: "Operacion cancelada" });
@@ -253,6 +234,7 @@ function eliminarCliente(cliente) {
 }
 function organizarClientes(clientes) {
     const lista = document.getElementById("listCliente");
+    const tableClients = document.getElementById("clientContent");
     // console.log("metodo Organizar Clientes:\n" + clientes);
     lista.innerHTML = '';
     const newClienteOption = document.createElement("option");
@@ -267,32 +249,67 @@ function organizarClientes(clientes) {
     paymentClient.append(defaultOption.cloneNode(true));
     if (clientes.length > 0) {
     clientes.map(x => {
-
-        lista.innerHTML += '<li class="collection-item">'
-        + '<span class="title">' + x.nombre + '<br></span>'
-        + x.telefono + '<br>'
-        + x.comentarios
-        + '<a class="secondary-content" href="#" '
-        + 'onclick="eliminarCliente(\'' + x._id + '\')">'
-        + '<i class="material-icons">delete</i></a>'
-        + '<a class="secondary-content modal-trigger" '
-        + 'href="#updateCliente" '
-        + 'onclick="editarCliente(\'' + x._id + '\')">'
-        + '<i class="material-icons">edit</i></a>'
-        + '</li>';
-
+        /**
+         * A lo peñarol
+         *
+         * lista.innerHTML += '<li class="collection-item">'
+         * + '<span class="title">' + x.nombre + '<br></span>'
+         * + x.telefono + '<br>'
+         * + x.comentarios
+         * + '<a class="secondary-content" href="#" '
+         * + 'onclick="eliminarCliente(\'' + x._id + '\')">'
+         * + '<i class="material-icons">delete</i></a>'
+         * + '<a class="secondary-content modal-trigger" '
+         * + 'href="#updateCliente" '
+         * + 'onclick="editarCliente(\'' + x._id + '\')">'
+         * + '<i class="material-icons">edit</i></a>'
+         * + '</li>';
+        **/
+        /**
+         * Mediante Javascript puro
+         */
         const option = document.createElement("option");
         option.value = x._id;
         option.text = x.nombre;
         clienteEvento.append(option);
         paymentClient.append(option.cloneNode(true));
 
-        // clienteEvento.innerHTML += '<option value="'
-        //     + x._id + '">'
-        //     + x.nombre
-        //     + '<p class="helper-text">' + x.telefono + '</p>'
-        //     + '<p class="helper-text">' + x.comentarios + '</p>'
-        //     + '</option>';
+        const clientRow         = document.createElement("tr");
+        const clientName        = document.createElement("td");
+        const clientPhone       = document.createElement("td");
+        const clientMail        = document.createElement("td");
+        const clientComments    = document.createElement("td");
+        const clientEdit        = document.createElement("td");
+        const clientDelete      = document.createElement("td");
+
+        const editButton = document.createElement("a");
+        const editIcon = document.createElement("i");
+        const deleteButton = document.createElement("a");
+        const deleteIcon = document.createElement("i");
+
+        editButton.classList.add("button", "modal-trigger");
+        editButton.href = "#updateCliente";
+        editButton.setAttribute("onclick", "editarCliente(\'" + x._id + "\')");
+        editIcon.classList.add("material-icons")
+        editIcon.textContent = "payment";
+        editButton.appendChild(editIcon);
+
+        deleteButton.classList.add("button");
+        deleteButton.setAttribute("onclick", "eliminarCliente(\'" + x._id + "\')");
+        deleteIcon.classList.add("material-icons");
+        deleteIcon.textContent = "delete";
+        deleteButton.appendChild(deleteIcon);
+
+        clientName.textContent = x.nombre;
+        clientPhone.textContent = x.telefono;
+        clientMail.textContent = x.email;
+        clientComments.textContent = x.comentarios;
+        clientEdit.appendChild(editButton);
+        clientDelete.appendChild(deleteButton);
+
+        clientRow.append(clientName, clientPhone, clientMail, clientComments, clientEdit, clientDelete);
+
+        tableClients.append(clientRow);
     });
         } else {
         lista.innerHTML += '<li class="collection-item">'
@@ -325,68 +342,70 @@ ipcRenderer.on('get-clientes', (e, args) => {
 
 //#region Eventos
 function organizarEventos(eventos) {
-    const lista = document.getElementById('listEvento');
+    const tableEvents = document.getElementById("eventContent");
     let cliente = {};
-    lista.innerHTML = '';
+    tableEvents.innerHTML = '';
+
     if (eventos.length > 0) {
         eventosCalendar = [];
         eventos.map(e => {
-            cliente = listaClientes.find(x => x._id === e.cliente);
-            const fecha = moment(e.fecha, 'YYYY-MM-DD');
-            let tipo = "";
-            const listItem = document.createElement("li");
-            const eventItem = document.createElement("div");
-            const payOption = document.createElement("a");
-            let deleteOption = document.createElement("a");
-            const payIcon = document.createElement("i");
-            const deleteIcon = document.createElement("i");
-            switch (e.tipo) {
-                case 1:
-                tipo = "Cumpleaños";
-                break;
-                case 2:
-                tipo = "Aniversario";
-                break;
-                case 3:
-                tipo = "Boda";
-                break;
-                case 4:
-                tipo = "Bautizo";
-                break;
-                case 5:
-                tipo = "Reunion";
-                break;
-                case 6:
-                tipo = "Otro";
-                break;
-            }
-            eventItem.textContent = fecha.format("dddd Do MMMM YYYY") + ": " + cliente.nombre;
-            // listItem.setAttribute("onclick", 'alert(\'' + e._id + '\\n' + fecha.format("YYYY-MM-DD") + '\\n' + cliente.nombre + '\\n' + e.total + '\\n' + e.comentarios + '\')');
-            listItem.classList.add("collection-item");
 
-            payOption.classList.add("secondary-content", "modal-trigger");
+            cliente = listaClientes.find(x => x._id === e.cliente);
+            console.log("cliente= " + JSON.stringify(cliente));
+            const fecha = moment(e.fecha, 'YYYY-MM-DD');
+            let tipo = defineType(e.tipo);
+            const eventRow      = document.createElement("tr");
+            const eventDate     = document.createElement("td");
+            const eventType     = document.createElement("td");
+            const eventClient   = document.createElement("td");
+            const eventPayment  = document.createElement("td");
+            const eventDetails  = document.createElement("td");
+            const eventDelete   = document.createElement("td");
+            const payOption     = document.createElement("a");
+            const detailsOption = document.createElement("a");
+            const deleteOption  = document.createElement("a");
+            const payIcon       = document.createElement("i");
+            const detailsIcon   = document.createElement("i");
+            const deleteIcon    = document.createElement("i");
+
+            eventDate.textContent = fecha.format("dddd Do MMMM YYYY");
+            eventType.textContent = tipo;
+            eventClient.textContent = cliente.nombre;
+
+            detailsOption.classList.add("modal-trigger");
+            detailsOption.setAttribute("href", "#detailEvent");
+            detailsOption.setAttribute("onclick", "detalleEvento(\'" + e._id + "\')");
+
+            payOption.classList.add("modal-trigger");
             payOption.setAttribute("href", "#newPayment");
             payOption.setAttribute("onclick", "pagarEvento(\'" + e._id + "\')");
-            deleteOption.classList.add("secondary-content");
+
+
             deleteOption.setAttribute("href", "#");
             deleteOption.setAttribute("onclick", "eliminarEvento(\'" + e._id + "\')");
-            //este de abajo no funciona
+            //este de abajo no funciona por alguna razon
             // deleteOption.addEventListener("click", eliminarEvento(e._id));
 
             payIcon.classList.add("material-icons");
+            detailsIcon.classList.add("material-icons");
             deleteIcon.classList.add("material-icons");
             payIcon.textContent = "credit_card";
+            detailsIcon.textContent = "event_note";
             deleteIcon.textContent = "delete";
-            deleteOption.appendChild(deleteIcon);
             payOption.appendChild(payIcon);
-            eventItem.append(deleteOption, payOption);
-            listItem.appendChild(eventItem);
-            lista.appendChild(listItem);
-            // console.log("lista justo despues del appendChild:\n" + lista.innerHTML);
+            deleteOption.appendChild(deleteIcon);
+            detailsOption.appendChild(detailsIcon);
+            eventDelete.appendChild(deleteOption);
+            eventDetails.appendChild(detailsOption);
+            eventPayment.appendChild(payOption);
+
+            eventRow.append(eventDate, eventClient, eventType, eventDetails, eventPayment, eventDelete);
+            tableEvents.append(eventRow);
+
             const evCalendar = {
                 id: e._id,
                 startDate: new Date(moment(e.fecha, 'YYYY-MM-DD')),
-                endDate: new Date(moment(e.fecha,'YYYY-MM-DD')),
+                endDate: new Date(moment(e.fecha, 'YYYY-MM-DD')),
                 name: tipo,
                 details: e.comentarios
             }
@@ -395,15 +414,17 @@ function organizarEventos(eventos) {
         //se agregan los eventos al calendario
         calendar.setDataSource(eventosCalendar);
     } else {
-        const listItem = document.createElement("li");
-        const eventItem = document.createElement("div");
-        listItem.classList.add("collection-item");
-        eventItem.textContent = "De momento no hay fechas ocupadas.";
-        listItem.appendChild(eventItem);
-        lista.appendChild(listItem);
+        const eventRow = document.createElement("tr");
+        const eventDate = document.createElement("td");
+        eventDate.classList.add("center");
+        eventDate.setAttribute("colspan", 6);
+        eventDate.textContent = "De momento no hay fechas ocupadas";
+        eventRow.appendChild(eventDate);
+        tableEvents.appendChild(eventRow);
     }
 
 }
+
 ipcRenderer.send("get-eventos");
 
 ipcRenderer.on("get-eventos", (e, args) => {
@@ -436,11 +457,8 @@ ipcRenderer.on("evento-eliminado", (e, args) => {
     console.log("lista de pagos del evento: " + JSON.stringify(id.pagos) + "tamaño lista=" + id.pagos.length);
     let result = listaEventos.filter(evento => { return evento._id !== id._id });
     if (id.pagos.length > 0) {
-        // e.sender.send('eliminar-pagos-evento', id.pagos);
         e.sender.send('eliminar-pagos-evento', id._id);
     }
-    // console.log("eventos restantes (no debe aparecer el id: " + JSON.stringify(id) + "):\n" + JSON.stringify(result));
-    // console.log("Ahora la lista de eventos antes de ser reemplazada por la lista nueva: " + listaEventos);
     listaEventos = result;
     organizarEventos(listaEventos);
     M.toast({ html: "Evento eliminado exitosamente" });
@@ -459,12 +477,63 @@ ipcRenderer.on("evento-actualizado", (e, args) => {
     M.toast({ html: "Evento editado exitosamente" });
 })
 //#endregion
-//#region Pagos
-function organizarPagos(pagos) {
-    const lista = document.getElementById('listPago');
-    lista.innerHTML = '';
-    pagos.map(p => {
 
+//#region Pagos
+function organizarPagos(evento) {
+    const lista = document.getElementById('listPago');
+    const collapsible = document.querySelector(".collapsible");
+    const pagos = listaPagos.filter(p => p.evento === evento);
+    lista.innerHTML = '';
+    if (pagos.length > 0) {
+        pagos.map(p => {
+
+            let listItem = document.createElement("li");
+            let listHeader = document.createElement("div");
+            let listBody = document.createElement("div");
+            let paymentIcon = document.createElement("i");
+            let paymentType = "Pago";
+
+            listHeader.classList.add("collapsible-header");
+            listBody.classList.add("collapsible-body");
+            paymentIcon.classList.add("material-icons");
+
+            switch (p.tipo) {
+                case 1:
+                    paymentIcon.textContent = "monetization_on";
+                    paymentType = "Efectivo";
+                    break;
+                case 2:
+                    paymentIcon.textContent = "credit_card";
+                    paymentType = "Tarjeta";
+                    break
+                case 3:
+                    paymentIcon.textContent = "local_atm";
+                    paymentType = "Transferencia/Deposito";
+                    break;
+            }
+
+            listHeader.append(paymentIcon, paymentType);
+
+            let paymentMount = document.createElement("span");
+            paymentMount.textContent = "Monto: " + p.monto;
+
+            let paymentDate = document.createElement("p");
+            paymentDate.textContent = "Fecha del pago: " + p.fecha.substring(0, 10);
+
+            listBody.append(paymentDate, paymentMount);
+            listItem.append(listHeader, listBody);
+            lista.append(listItem);
+        });
+    } else {
+        let listItem = document.createElement("li");
+        let listHeader = document.createElement("div");
+        listHeader.classList.add("collapsible-header");
+        listHeader.textContent = "Ninguno";
+        listItem.appendChild(listHeader);
+        lista.appendChild(listItem);
+    }
+    M.Collapsible.init(collapsible, {
+        accordion: false
     });
 }
 
@@ -491,7 +560,7 @@ formPagos.addEventListener('submit', async e => {
         }
         ipcRenderer.send('nuevo-pago', pago);
         console.log("pago...\n" + JSON.stringify(pago));
-        M.toast({html:"creando pago..."});
+        M.toast({ html: "creando pago..." });
     } else {
         pago = {
             evento: ev,
@@ -502,7 +571,7 @@ formPagos.addEventListener('submit', async e => {
         }
         ipcRenderer.send('nuevo-pago', pago);
         console.log("pago...\n" + JSON.stringify(pago));
-        M.toast({html:"creando pago..."});
+        M.toast({ html: "creando pago..." });
     }
 
 });
@@ -515,14 +584,6 @@ ipcRenderer.on("pago-nuevo-creado", (e, args) => {
     console.log("lista de pagos del evento a editar sin el pago nuevo: " + eventoaEditar.pagos);
     eventoaEditar.pagos.push(pagoNuevo._id);
     console.log("lista de pagos de evento a editar con el pago nuevo: " + eventoaEditar.pagos);
-    // let eventos = listaEventos.filter(ev => ev._id !== eventoEditado._id);
-    //tipos de pago: 1=Efectivo, 2=Tarjeta, 3=Deposito/Transferencia
-    // let eventos = listaEventos.map(ev => {
-    //     return ev._id !== eventoEditado._id;
-    // });
-    // eventos.push(eventoEditado);
-    // organizarEventos(eventos);
-    //organizarPagos(listaPagos);
     M.toast({ html: "Pago realizado" });
     e.sender.send("editar-evento", eventoaEditar);
 });
@@ -532,16 +593,6 @@ function pagarEvento(id) {
     console.log("parametro de pagarEvento = " + id);
     const evento = listaEventos.find(e => e._id === id);
     const cliente = listaClientes.find(c => c._id === evento.cliente);
-    // for (let x = 0; x < paymentClient.options.length; x++) {
-    //     const option = paymentClient.options[x];
-    //     if (option.value == cliente._id) {
-    //         option.setAttribute("selected", true);
-    //         //break;
-    //     } else {
-    //         option.setAttribute("selected", false);
-    //         continue;
-    //     }
-    // }
     paymentClient.nodeValue = cliente._id;
     // paymentClient.children.item(cliente.nombre).setAttribute("selected", true);
     console.log("Evento:\n" + JSON.stringify(evento) + "\n\nCliente:\n" + JSON.stringify(cliente));
@@ -565,7 +616,8 @@ function pagarEvento(id) {
 
     console.log("evento.fecha: " + evento.fecha + "\nevento.fecha moment: " + moment(evento.fecha) + "\nevento.fecha moment formateado: " + moment(evento.fecha).format("YYYY-MM-DD") + "\nevento.fecha por new Date: " + new Date(evento.fecha));
 
-    let fechaEvento = evento.fecha.substring(0,10); console.log("FechaEvento=" + fechaEvento);
+    let fechaEvento = evento.fecha.substring(0, 10);
+    console.log("FechaEvento=" + fechaEvento);
     paymentEvent.value = fechaEvento;
     paymentClient.value = cliente.nombre;
     // paymentDate.value = new Date();
@@ -573,7 +625,6 @@ function pagarEvento(id) {
 ipcRenderer.send("get-pagos");
 ipcRenderer.on("get-pagos", (e, args) => {
     listaPagos = JSON.parse(args);
-    organizarPagos(listaPagos);
 });
 ipcRenderer.on("pagos-eliminados", (e, args) => {
     const registros = JSON.parse(args);
@@ -588,8 +639,41 @@ ipcRenderer.on("pagos-eliminados", (e, args) => {
        }
     });
     listaPagos = listanueva;
-    organizarPagos(listaPagos);
 });
+
+function detalleEvento(ev) {
+    //const eventModal = document.getElementById("detailEvent");
+    const evento = listaEventos.find(e => e._id === ev);
+    let cliente = listaClientes.find(c => c._id === evento.cliente);
+    let tipo = defineType(evento.tipo);
+
+    let eventDate = document.getElementById("detailEventDate");
+    eventDate.value = evento.fecha.substring(0, 10);
+
+    let eventClient = document.getElementById("detailEventClient");
+    eventClient.value = cliente.nombre;
+
+    let eventType = document.getElementById("detailEventType");
+    eventType.value = tipo;
+
+    let eventPrice = document.getElementById("detailEventPrice");
+    eventPrice.value = evento.precio;
+
+    let eventAditional = document.getElementById("detailEventAditional");
+    eventAditional.value = evento.adicional;
+
+    let eventComments = document.getElementById("detailEventComments");
+    eventComments.value = evento.comentarios;
+
+    let eventTotal = document.getElementById("detailEventTotal");
+    eventTotal.value = evento.total;
+
+    // let payList = document.getElementById("listPago");
+    // let eventPayments = [];
+    let btnEventPayments = document.getElementById("detailEventPayments");
+    btnEventPayments.setAttribute("onclick", "organizarPagos(\'" + evento._id + "\')");
+    organizarPagos(evento._id);
+};
 //#endregion
 
 document.querySelector('.calendar').addEventListener('clickDay', (e) => {
@@ -676,3 +760,28 @@ const sumarTotal = () => {
 totales.forEach((campo) => {
     campo.addEventListener('keyup', sumarTotal);
 });
+
+function defineType(param) {
+    let result = null;
+    switch (param) {
+        case 1:
+            result = "Cumpleaños";
+            break;
+        case 2:
+            result = "Aniversario";
+            break;
+        case 3:
+            result = "Boda";
+            break;
+        case 4:
+            result = "Bautizo";
+            break;
+        case 5:
+            result = "Reunion";
+            break;
+        case 6:
+            result = "Otro";
+            break;
+    }
+    return result;
+};

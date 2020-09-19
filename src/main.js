@@ -38,8 +38,6 @@ function createWindow() {
 
     // y carga el  index.html de la aplicación.
     ventanaPrincipal.loadFile(path.join(__dirname, 'views/index.html'));
-
-    // console.log("directorio donde se busca la ventana principal: " + __dirname + "/views/index.html");
 }
 
 // function abrirVentanaAcercaDe() {
@@ -128,7 +126,6 @@ ipcMain.on('newEvento', async (e, args) => {
 
 ipcMain.on('nuevo-pago', async (e, args) => {
     console.log("ipcMainNewPayment \n" + JSON.stringify(args));
-    //let arrayPagos = [];
     let eventoUpdated = null;
     try {
         const p = {
@@ -141,21 +138,7 @@ ipcMain.on('nuevo-pago', async (e, args) => {
         console.log("acomodo el objeto pago y lo guardo...");
         const pago = new Pago(p);
         let result = await pago.save()
-            // .then((pagoResult) => {
-            //     console.log("se guarda el pago y ahora procedo a editar el evento para agregarle el pago que se ha creado...");
-            //     //arrayPagos.push(pagoResult);
-            //     let evento = Evento.findById(args.evento._id);
 
-            //     console.log("evento encontrado sin modificar:\n" + JSON.stringify(evento) + "\n\n" + "y aqui se debe mostrar el array de pagos:\n" + JSON.stringify(evento.pagos) + "\n\n");
-
-            //     evento.pagos.push(pagoResult._id);
-            //     console.log("busco el evento por el id, accedo a su atributo de pagos y le agrego el pago que se acaba de hacer (" + evento.pagos + ")...");
-
-            //     evento.status = (args.evento.status != evento.status) ? args.evento.status : evento.status;
-            //     console.log("ya modificado el evento procedo a actualizarlo en la base de datos...");
-
-            //     eventoUpdated = Evento.findByIdAndUpdate(args.evento._id, evento,{ new : true });
-            // });
         console.log("pago creado: " + result + "\nse procede a actualizar el evento: " + args.evento);
         const finalResult = {
             "pago": result,
@@ -196,7 +179,6 @@ ipcMain.on('eliminar-evento', async (e, args) => {
 });
 ipcMain.on('editar-evento', async (e, eventoAEditar) => {
     try {
-        //const evento = JSON.parse(eventoAEditar);
         const result = await Evento.findByIdAndUpdate(eventoAEditar._id, {
             pagos: eventoAEditar.pagos,
             status: eventoAEditar.status

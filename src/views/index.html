@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <!-- <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self';" /> -->
-    <!-- librerias de estilos -->
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="../../node_modules/materialize-css/dist/css/materialize.min.css">
-    <link rel="stylesheet" href="../../node_modules/js-year-calendar/dist/js-year-calendar.min.css">
-    <link rel="stylesheet" href="../../assets/appStyles.css">
-    <!-- fin librerias de estilos -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Casa Verde</title>
-  </head>
-  <body>
-    <main>
+
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self';" /> -->
+  <!-- librerias de estilos -->
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="../../node_modules/materialize-css/dist/css/materialize.min.css">
+  <link rel="stylesheet" href="../../node_modules/js-year-calendar/dist/js-year-calendar.min.css">
+  <link rel="stylesheet" href="../../assets/appStyles.css">
+  <!-- fin librerias de estilos -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Casa Verde</title>
+</head>
+
+<body>
+  <main>
     <div class="row">
       <div class="navbar-fixed">
-      <nav id="navegacionprincipal">
+        <nav id="navegacionprincipal">
           <div class="nav-wrapper">
             <ul class="tabs tabs-transparent">
               <li class="tab col l4">
@@ -43,9 +45,9 @@
             <form id="crearEvento">
               <div class="row">
                 <div class="input-field col m6 s12">
-                    <label for="fecha">Fecha del Evento</label>
-                    <input type="date" name="fecha" id="fecha" readonly>
-                    <span class="text-helper" data-success="bien" data-error="fecha no valida"></span>
+                  <label for="fecha">Fecha del Evento</label>
+                  <input type="date" name="fecha" id="fecha" readonly>
+                  <span class="text-helper" data-success="bien" data-error="fecha no valida"></span>
                 </div>
 
                 <div class="input-field col m6 s12">
@@ -58,44 +60,51 @@
               </div>
               <div class="row">
                 <div class="" id="nuevocliente" style="display: none;">
-                    <div class="row">
-                      <div class="input-field col m6 s12">
-                        <input form="formNewCliente" type="text" name="nombrenuevo" id="nombrenuevo" class="validate">
-                        <span class="text-helper" data-error="no es valido" data-success="bien"></span>
-                        <label for="nombrenuevo">Nombre</label>
-                      </div>
+                  <div class="row">
+                    <div class="input-field col m6 s12">
+                      <input form="formNewCliente" type="text" name="nombrenuevo" id="nombrenuevo" class="validate">
+                      <span class="text-helper" data-error="no es valido" data-success="bien"></span>
+                      <label for="nombrenuevo">Nombre</label>
+                    </div>
 
-                      <div class="input-field col m6 s12">
-                        <input form="formNewCliente" type="email" name="emailnuevo" id="emailnuevo">
-                        <span class="text-helper" data-error="correo inválido" data-success="bien"></span>
-                        <label for="emailnuevo">Correo electronico</label>
-                      </div>
+                    <div class="input-field col m6 s12">
+                      <input form="formNewCliente" type="email" name="emailnuevo" id="emailnuevo">
+                      <span class="text-helper" data-error="correo inválido" data-success="bien"></span>
+                      <label for="emailnuevo">Correo electronico</label>
                     </div>
-                    <div class="row">
-                      <div class="input-field col m6 s12">
-                        <label for="telefono1nuevo">Telefono principal</label>
-                        <input form="formNewCliente" type="tel" name="telefono1nuevo" id="telefono1nuevo" class="validate">
-                        <span class="text-helper" data-error="telefono inválido" data-success="bien"></span>
-                        <label for="telefono1nuevo">Telefono</label>
-                      </div>
-                      <div class="input-field col m6 s12">
-                        <label for="telefono2nuevo">Telefono de respaldo</label>
-                        <input form="formNewCliente" type="tel" name="telefono2nuevo" id="telefono2nuevo" class="validate">
-                        <span class="text-helper" data-success="bien" data-error="telefono inválido"></span>
-                      </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col m6 s12">
+                      <label for="telefono1nuevo">Telefono principal</label>
+                      <input form="formNewCliente" type="tel" name="telefono1nuevo" id="telefono1nuevo"
+                        class="validate">
+                      <span class="text-helper" data-error="telefono inválido" data-success="bien"></span>
+                      <label for="telefono1nuevo">Telefono</label>
                     </div>
-                    <div class="row">
-                        <div class="input-field">
-                          <label for="clientecomentariosnuevo">Comentarios</label>
-                          <textarea form="formNewCliente" class="materialize-textarea validate" name="clientecomentariosnuevo" id="clientecomentariosnuevo" data-length="200" maxlength="200"></textarea>
-                          <span class="text-helper" data-error="Has excedido el limite de caracteres" data-success="Bien"></span>
-                        </div>
+                    <div class="input-field col m6 s12">
+                      <label for="telefono2nuevo">Telefono de respaldo</label>
+                      <input form="formNewCliente" type="tel" name="telefono2nuevo" id="telefono2nuevo"
+                        class="validate">
+                      <span class="text-helper" data-success="bien" data-error="telefono inválido"></span>
                     </div>
-                    <div class="row">
-                      <button form="formNewCliente" id="limpiarCliente" class="btn" type="reset"><i class="material-icons">clear</i> Limpiar</button>
+                  </div>
+                  <div class="row">
+                    <div class="input-field">
+                      <label for="clientecomentariosnuevo">Comentarios</label>
+                      <textarea form="formNewCliente" class="materialize-textarea validate"
+                        name="clientecomentariosnuevo" id="clientecomentariosnuevo" data-length="200"
+                        maxlength="200"></textarea>
+                      <span class="text-helper" data-error="Has excedido el limite de caracteres"
+                        data-success="Bien"></span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <button form="formNewCliente" id="limpiarCliente" class="btn" type="reset"><i
+                        class="material-icons">clear</i> Limpiar</button>
 
-                      <button form="formNewCliente" id="crearnuevocliente" class="btn" type="submit">Registrar cliente<i class="material-icons">right</i></button>
-                    </div>
+                    <button form="formNewCliente" id="crearnuevocliente" class="btn" type="submit">Registrar cliente<i
+                        class="material-icons">right</i></button>
+                  </div>
 
                 </div>
               </div>
@@ -129,7 +138,8 @@
                     <option value="6">Otro</option>
                   </select>
                   <label>Tipo de Evento</label>
-                  <span class="text-helper" data-error="debe seleccionar alguna opcion válida" data-success="bien"></span>
+                  <span class="text-helper" data-error="debe seleccionar alguna opcion válida"
+                    data-success="bien"></span>
                 </div>
                 <div class="input-field col m6 s12">
                   <select class="select" id="statusEvento">
@@ -138,12 +148,14 @@
                     <option value="pagado">Pagado</option>
                   </select>
                   <label>Status del Evento</label>
-                  <span class="text-helper" data-error="debe seleccionar alguna opcion válida" data-success="bien"></span>
+                  <span class="text-helper" data-error="debe seleccionar alguna opcion válida"
+                    data-success="bien"></span>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col m12">
-                  <textarea name="comentarios" id="comentarios" class="materialize-textarea" data-length="200" maxlength="200"></textarea>
+                  <textarea name="comentarios" id="comentarios" class="materialize-textarea" data-length="200"
+                    maxlength="200"></textarea>
                   <label for="comentarios">Comentarios</label>
                 </div>
               </div>
@@ -164,9 +176,22 @@
         <div class="">
           <div class="row">
             <div class="col s12">
-              <ul class="collection" id="listEvento">
-                Por ahora no hay pagos registrados en el Sistema
-              </ul>
+
+              <table class="highlight responsive-table">
+                <thead>
+                  <tr>
+                    <th>Fecha</th>
+                    <th>Cliente</th>
+                    <th>Tipo</th>
+                    <th>Detalles</th>
+                    <th>Pago</th>
+                    <th>Borrar</th>
+                  </tr>
+                </thead>
+                <tbody id="eventContent">
+
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -174,13 +199,28 @@
 
       <div id="clienteTab">
         <!-- <div class="container"> -->
-          <!-- <div class="row"> -->
-            <!-- <div class="col s12"> -->
-              <ul class="collection" id="listCliente">
-                Por ahora no hay clientes registrados en el Sistema
-              </ul>
-            <!-- </div> -->
-          <!-- </div> -->
+        <!-- <div class="row"> -->
+        <!-- <div class="col s12"> -->
+        <ul class="collection" id="listCliente">
+          Por ahora no hay clientes registrados en el Sistema
+        </ul>
+        <table class="highlight responsive-table" id="clientTable">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Telefono</th>
+              <th>Correo</th>
+              <th>Comentarios</th>
+              <th>Editar</th>
+              <th>Borrar</th>
+            </tr>
+          </thead>
+          <tbody id="clientContent">
+
+          </tbody>
+        </table>
+        <!-- </div> -->
+        <!-- </div> -->
         <!-- </div> -->
         <div class="fixed-action-btn toolbar">
           <a class="btn-floating btn-large blue modal-trigger waves-effect waves-light" href="#modalCliente">
@@ -201,38 +241,40 @@
                   <span class="helper-text" data-error="Formato Inválido" data-success="Bien"></span>
                 </div>
               </div>
-                  <div class="row">
-                    <div class="input-field col s6">
-                      <input type="text" name="" id="telefono1" class="validate">
-                      <label for="telefono1">Telefono Principal</label>
-                      <span class="helper-text" data-error="Dato Inválido" data-success="Bien"></span>
-                    </div>
-                    <div class="input-field col s6">
-                      <input type="text" name="telefono2" id="telefono2" class="validate">
-                      <label for="telefono2">Telefono Secundario</label>
-                      <span class="helper-text" data-error="Dato Inválido" data-success="Bien"></span>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="input-field col s12">
-                      <input type="email" name="email" id="email" class="validate">
-                      <label for="email">Correo Electrónico</label>
-                      <span class="helper-text" data-error="Correo Inválido" data-success="Bien"></span>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="input-field col s12">
-                      <textarea name="comentarioscliente" id="comentarioscliente" cols="30" rows="10" data-length=200 class="materialize-textarea" maxlength="200"></textarea>
-                      <label for="comentarioscliente">Comentarios</label>
-                      <span class="helper-text" data-error="Dato Inválido" data-success="Bien"></span>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col s3"><button type="reset" class="btn">Limpiar <i class="materialize-icons"></i></button>
-                    </div>
-                    <div class="col s3"><button type="submit" class="btn">Registrar <i class="materialize-icons"></i></button>
-                    </div>
-                  </div>
+              <div class="row">
+                <div class="input-field col s6">
+                  <input type="text" name="" id="telefono1" class="validate">
+                  <label for="telefono1">Telefono Principal</label>
+                  <span class="helper-text" data-error="Dato Inválido" data-success="Bien"></span>
+                </div>
+                <div class="input-field col s6">
+                  <input type="text" name="telefono2" id="telefono2" class="validate">
+                  <label for="telefono2">Telefono Secundario</label>
+                  <span class="helper-text" data-error="Dato Inválido" data-success="Bien"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="email" name="email" id="email" class="validate">
+                  <label for="email">Correo Electrónico</label>
+                  <span class="helper-text" data-error="Correo Inválido" data-success="Bien"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <textarea name="comentarioscliente" id="comentarioscliente" cols="30" rows="10" data-length=200
+                    class="materialize-textarea" maxlength="200"></textarea>
+                  <label for="comentarioscliente">Comentarios</label>
+                  <span class="helper-text" data-error="Dato Inválido" data-success="Bien"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col s3"><button type="reset" class="btn">Limpiar <i class="materialize-icons"></i></button>
+                </div>
+                <div class="col s3"><button type="submit" class="btn">Registrar <i
+                      class="materialize-icons"></i></button>
+                </div>
+              </div>
             </form>
           </div>
           <div class="modal-footer"><button class="btn modal-close waves-effect waves-green">Cerrar</button></div>
@@ -244,45 +286,47 @@
       <div class="modal-content">
         <form action="" method="post" id="formUpdateCliente">
           <div class="row">
-                <div class="input-field col s12">
-                  <input type="text" name="updatenombre" id="updatenombre" class="validate" autofocus>
-                  <label for="updatenombre">Nombre</label>
-                  <span class="helper-text" data-error="Formato Inválido" data-success="Bien"></span>
-                </div>
-              </div>
-                  <div class="row">
-                    <div class="input-field col s6">
-                      <input type="text" name="updatetelefono1" id="updatetelefono1" class="validate">
-                      <label for="updatetelefono1">Telefono Principal</label>
-                      <span class="helper-text" data-error="Dato Inválido" data-success="Bien"></span>
-                    </div>
-                    <div class="input-field col s6">
-                      <input type="text" name="updatetelefono2" id="updatetelefono2" class="validate">
-                      <label for="updatetelefono2">Telefono Secundario</label>
-                      <span class="helper-text" data-error="Dato Inválido" data-success="Bien"></span>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="input-field col s12">
-                      <input type="email" name="updateemail" id="updateemail" class="validate">
-                      <label for="updateemail">Correo Electrónico</label>
-                      <span class="helper-text" data-error="Correo Inválido" data-success="Bien"></span>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="input-field col s12">
-                      <textarea name="updatecomentarioscliente" id="updatecomentarioscliente" data-length=200 class="materialize-textarea"></textarea>
-                      <label for="updatecomentarioscliente">Comentarios</label>
-                      <span class="helper-text" data-error="Dato Inválido" data-success="Bien"></span>
-                    </div>
-                  </div>
-                  <div class="row input-field" hidden><input type="text" name="idCliente" id="idCliente"></div>
-                  <div class="row">
-                    <div class="col s3"><button type="reset" class="btn">Limpiar <i class="materialize-icons"></i></button>
-                    </div>
-                    <div class="col s3"><button type="submit" class="btn modal-close">Modificar <i class="materialize-icons"></i></button>
-                    </div>
-                  </div>
+            <div class="input-field col s12">
+              <input type="text" name="updatenombre" id="updatenombre" class="validate" autofocus>
+              <label for="updatenombre">Nombre</label>
+              <span class="helper-text" data-error="Formato Inválido" data-success="Bien"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <input type="text" name="updatetelefono1" id="updatetelefono1" class="validate">
+              <label for="updatetelefono1">Telefono Principal</label>
+              <span class="helper-text" data-error="Dato Inválido" data-success="Bien"></span>
+            </div>
+            <div class="input-field col s6">
+              <input type="text" name="updatetelefono2" id="updatetelefono2" class="validate">
+              <label for="updatetelefono2">Telefono Secundario</label>
+              <span class="helper-text" data-error="Dato Inválido" data-success="Bien"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input type="email" name="updateemail" id="updateemail" class="validate">
+              <label for="updateemail">Correo Electrónico</label>
+              <span class="helper-text" data-error="Correo Inválido" data-success="Bien"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <textarea name="updatecomentarioscliente" id="updatecomentarioscliente" data-length=200
+                class="materialize-textarea"></textarea>
+              <label for="updatecomentarioscliente">Comentarios</label>
+              <span class="helper-text" data-error="Dato Inválido" data-success="Bien"></span>
+            </div>
+          </div>
+          <div class="row input-field" hidden><input type="text" name="idCliente" id="idCliente"></div>
+          <div class="row">
+            <div class="col s3"><button type="reset" class="btn">Limpiar <i class="materialize-icons"></i></button>
+            </div>
+            <div class="col s3"><button type="submit" class="btn modal-close">Modificar <i
+                  class="materialize-icons"></i></button>
+            </div>
+          </div>
         </form>
       </div>
       <div class="modal-footer"><button class="btn modal-close waves-effect waves-green">Cerrar</button></div>
@@ -294,71 +338,121 @@
       <div class="modal-content">
         <form action="" method="post" id="formNewPayment">
           <div class="row">
-                <div class="input-field col s6">
-                  <input type="date" name="paymentEvent" id="paymentEvent" readonly>
-                  <label for="paymentEvent">Evento a pagar</label>
-                </div>
-                <div class="input-field col s6">
-                  <input type="date" name="paymentDate" id="paymentDate" required>
-                  <label for="paymentDate">Fecha del pago</label>
-                </div>
-              </div>
-                  <div class="row">
-                    <div class="input-field col s6">
-                      <select class="select" name="paymentType" id="paymentType">
-                        <option value="" selected disabled>Seleccione</option>
-                        <option value="1">Efectivo</option>
-                        <option value="2">Tarjeta</option>
-                        <option value="3">Transferencia/Depósito</option>
-                      </select>
-                      <label for="paymentType">Tipo de pago</label>
-                    </div>
-                    <div class="input-field col s6">
-                      <select class="select" name="paymentClient" id="paymentClient"></select>
-                      <label for="paymentClient">Cliente</label>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="input-field col s6">
-                      <input type="number" name="paymentMount" id="paymentMount" />
-                      <label for="paymentMount">Monto del pago</label>
-                    </div>
-                    <div class="input-field col s6"><input type="text" id="paymentRemain" name="paymentRemain" readonly><label for="paymentRemain">Total a pagar</label></div>
-                  </div>
-                  <div class="row">
-                    <div class="col s3"><button type="reset" class="btn">Limpiar <i class="materialize-icons">clear</i></button>
-                    </div>
-                    <div class="col s3"><button type="submit" class="btn modal-close">Efectuar <i class="materialize-icons">payment</i></button>
-                    </div>
-                  </div>
+            <div class="input-field col s6">
+              <input type="date" name="paymentEvent" id="paymentEvent" readonly>
+              <label for="paymentEvent">Evento a pagar</label>
+            </div>
+            <div class="input-field col s6">
+              <input type="date" name="paymentDate" id="paymentDate" required>
+              <label for="paymentDate">Fecha del pago</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <select class="select" name="paymentType" id="paymentType">
+                <option value="" selected disabled>Seleccione</option>
+                <option value="1">Efectivo</option>
+                <option value="2">Tarjeta</option>
+                <option value="3">Transferencia/Depósito</option>
+              </select>
+              <label for="paymentType">Tipo de pago</label>
+            </div>
+            <div class="input-field col s6">
+              <select class="select" name="paymentClient" id="paymentClient"></select>
+              <label for="paymentClient">Cliente</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <input type="number" name="paymentMount" id="paymentMount" />
+              <label for="paymentMount">Monto del pago</label>
+            </div>
+            <div class="input-field col s6"><input type="text" id="paymentRemain" name="paymentRemain" readonly><label
+                for="paymentRemain">Total a pagar</label></div>
+          </div>
+          <div class="row">
+            <div class="col s3"><button type="reset" class="btn">Limpiar <i class="materialize-icons">clear</i></button>
+            </div>
+            <div class="col s3"><button type="submit" class="btn modal-close">Efectuar <i
+                  class="materialize-icons">payment</i></button>
+            </div>
+          </div>
         </form>
       </div>
       <div class="modal-footer"><button class="btn modal-close waves-effect waves-green">Cerrar</button></div>
     </div>
     <!-- fin modal para pagos -->
-    <div class="modal" id="">
+
+    <!-- modal detalles Evento -->
+    <div class="modal" id="detailEvent">
       <div class="modal-content">
-        <ul id="listPago">
-          Lista de pagos
-        </ul>
+        <div class="row">
+          <div class="input-field col m4">
+            <input type="date" name="detailEventDate" id="detailEventDate" readonly>
+            <label for="detailEventDate">Fecha</label>
+          </div>
+          <div class="input-field col m4">
+            <input type="text" name="detailEventClient" id="detailEventClient" readonly>
+            <label for="detailEventClient">Cliente</label>
+          </div>
+          <div class="input-field col m4">
+            <input type="text" name="detailEventType" id="detailEventType" readonly>
+            <label for="detailEventType">Tipo de Evento</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col m4">
+            <input type="number" name="detailEventPrice" id="detailEventPrice" readonly>
+            <label for="detailEventPrice">Precio</label>
+          </div>
+          <div class="input-field col m4">
+            <input type="number" name="detailEventAditional" id="detailEventAditional" readonly>
+            <label for="detailEventAditional">Adicional</label>
+          </div>
+          <div class="input-field col m4">
+            <input type="number" name="detailEventTotal" id="detailEventTotal" readonly>
+            <label for="detailEventTotal">Total</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12">
+            <textarea name="detailEventComments" class="materialize-textarea"  id="detailEventComments" cols="30" rows="10" readonly></textarea>
+            <label for="detailEventComments">Comentarios</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12">
+            <h4>Pagos Realizados</h4>
+            <ul id="listPago" class="collapsible"></ul>
+          </div>
+        </div>
+
+      </div>
+          <div class="modal-footer">
+            <div class="col s4">
+              <a class="btn modal-close waves-effect waves-light center" id="detailEventPayments" href="#modalPagos">Cerrar</a>
+            </div>
+          </div>
+    </div>
+  </main>
+  <footer class="page-footer">
+    <!-- <div class="footer-copyright"> -->
+    <div class="container">
+      <div class="row">
+        © 2020 Copyright
+        <a class="grey-text text-lighten-4 right" href="./morelinks.html">More Links</a>
       </div>
     </div>
-    </main>
-        <footer class="page-footer">
-          <!-- <div class="footer-copyright"> -->
-            <div class="container">
-              <div class="row">
-            © 2020 Copyright
-            <a class="grey-text text-lighten-4 right" href="./morelinks.html">More Links</a>
-              </div>
-            </div>
-          <!-- </div> -->
-        </footer>
+    <!-- </div> -->
+  </footer>
 
-    <!-- Compiled and minified JavaScript -->
-    <script src="../../node_modules/materialize-css/dist/js/materialize.min.js"></script>
-    <script src="../../node_modules/js-year-calendar/dist/js-year-calendar.min.js"></script>
-    <script src="../../node_modules/js-year-calendar/locales/js-year-calendar.es.js"></script>
-    <script src="../renderer.js"></script>
-  </body>
+  <!-- Compiled and minified JavaScript -->
+  <script src="../../node_modules/materialize-css/dist/js/materialize.min.js"></script>
+  <script src="../../node_modules/js-year-calendar/dist/js-year-calendar.min.js"></script>
+  <script src="../../node_modules/js-year-calendar/locales/js-year-calendar.es.js"></script>
+  <script src="../renderer.js"></script>
+</body>
+
 </html>
