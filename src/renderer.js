@@ -100,18 +100,27 @@ clienteEvento.addEventListener('change', e => {
 formEvento.addEventListener('submit', e => {
     e.preventDefault();
     console.log('entra en el evento submit para crear el objeto evento');
-    const evento = {
-        fecha: fechaEvento.value,
-        cliente: clienteEvento.value,
-        tipo: parseInt(tipoEvento.value),
-        status: statusEvento.value,
-        precio: parseInt(precioEvento.value),
-        adicional: parseInt(adicionalEvento.value),
-        total: parseInt(totalEvento.value),
-        comentarios: comentariosEvento.value
-    };
-    console.log(evento);
-    ipcRenderer.send('newEvento', evento);
+    try {
+        if (adicionalEvento.value === "") {
+            adicionalEvento.value = 0;
+        }
+
+        const evento = {
+            fecha: fechaEvento.value,
+            cliente: clienteEvento.value,
+            tipo: parseInt(tipoEvento.value),
+            status: statusEvento.value,
+            precio: parseInt(precioEvento.value),
+            adicional: adicionalEvento.value,
+            total: parseInt(totalEvento.value),
+            comentarios: comentariosEvento.value
+        };
+        console.log(evento);
+        ipcRenderer.send('newEvento', evento);
+    } catch (error) {
+        console.log("Error al mandar datos: " + error);
+        M.toast({ html: "Error al mandar datos: " + error });
+    }
 });
 
 formNewCliente.addEventListener('submit', e => {
@@ -437,6 +446,10 @@ ipcRenderer.on('evento-creado', (e, args) => {
     let evento = JSON.parse(args);
     console.log("evento sin parsear:\n" + args);
     formEvento.reset();
+    /**
+     * apenas reseteo el formulario asigno el valor por defecto del combobox de cliente en el formulario
+     */
+    clienteEvento.value = clienteEvento.firstChild;
     listaEventos.push(evento);
     organizarEventos(listaEventos);
     M.toast({ html: "Evento registrado exitosamente!" });
@@ -454,9 +467,12 @@ function eliminarEvento(id) {
 
 ipcRenderer.on("evento-eliminado", (e, args) => {
     const id = JSON.parse(args);
-    console.log("lista de pagos del evento: " + JSON.stringify(id.pagos) + "tamaño lista=" + id.pagos.length);
+    console.log("lista de pagos del evento: " + JSON.stringify(id.pagos) + " tamaño lista=" + id.pagos.length);
     let result = listaEventos.filter(evento => { return evento._id !== id._id });
+    console.log("lista de eventos filtrados: " + result);
     if (id.pagos.length > 0) {
+        let listanueva = listaPagos.filter(p => { p.evento !== id._id });
+        listaPagos = listanueva;
         e.sender.send('eliminar-pagos-evento', id._id);
     }
     listaEventos = result;
@@ -625,20 +641,6 @@ function pagarEvento(id) {
 ipcRenderer.send("get-pagos");
 ipcRenderer.on("get-pagos", (e, args) => {
     listaPagos = JSON.parse(args);
-});
-ipcRenderer.on("pagos-eliminados", (e, args) => {
-    const registros = JSON.parse(args);
-    console.log("Registros eliminados:\n" + JSON.stringify(registros));
-    let listanueva = [];
-    listaPagos.forEach(pago => {
-       for (let x = 0; x < registros.length; x++) {
-           const p = registros[x];
-           if (pago._id !== p._id) {
-               listanueva.push(pago);
-           }
-       }
-    });
-    listaPagos = listanueva;
 });
 
 function detalleEvento(ev) {

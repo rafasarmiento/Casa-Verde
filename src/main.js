@@ -114,7 +114,6 @@ ipcMain.on('eliminar-cliente', async (e, args) => {
 
 ipcMain.on('newEvento', async (e, args) => {
     console.log("ipcMAINNewEvento \n" + JSON.stringify(args));
-    let valid = true;
     try {
         const evento = new Evento(args);
         let result = await evento.save();
@@ -202,7 +201,6 @@ ipcMain.on("eliminar-pagos-evento", async (e, args) => {
         const pagos = await Pago.deleteMany({ evento: args }).then((operationStats) => {
             const mensaje = "Registros encontrados=" + operationStats.n + "\nStatus=" + (operationStats.ok == 1 ? "OK" : "error") + "\nRegistros eliminados=" + operationStats.deletedCount;
             console.log(mensaje);
-            e.reply('pagos-eliminados', JSON.stringify(pagos));
         });
     } catch (error) {
         console.log(error);
